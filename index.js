@@ -16,7 +16,7 @@ console.log("url : " , process.env.CLIENT_URL);
 //setup ccores , confige cores for cookis access
 app.use(
   cors({
-    origin: 'https://smart-mess-system.vercel.app',  // e.g., 'http://localhost:5173' or https://smart-mess-system.vercel.app/
+    origin: process.env.CLIENT_URL,  // e.g., 'http://localhost:5173' or https://smart-mess-system.vercel.app/
     credentials: true,               // allows cookies / auth headers
   })
 );

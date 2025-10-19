@@ -42,62 +42,126 @@ console.log("otp is  :" , otp);
 
 
 
-//signup
-const userSignup = asyncWraper(async (req, res) => {
+//signup // old
+// const userSignup = asyncWraper(async (req, res) => {
 
-    const { firstName, lastName, email, password } = req.body;
+//     const { firstName, lastName, email, password } = req.body;
 
-    // 1. Check all fields are present
-    if (!firstName || !lastName || !email || !password) {
-        throw new ApiError(400, "Validation Error"  ,"All fields are required!");
-    }
+//     // 1. Check all fields are present
+//     if (!firstName || !lastName || !email || !password) {
+//         throw new ApiError(400, "Validation Error"  ,"All fields are required!");
+//     }
 
-    // 2. Check if the user already exists
-    const existingUser = await User.findOne({ email });
-    //one existinging user if email is verify otherview no
-    if (existingUser?.verified) {
-        throw new ApiError(409, "Validation Error" ,  "User with this email already exists.");
-    }
+//     // 2. Check if the user already exists
+//     const existingUser = await User.findOne({ email });
+//     //one existinging user if email is verify otherview no
+//     if (existingUser?.verified) {
+//         throw new ApiError(409, "Validation Error" ,  "User with this email already exists.");
+//     }else{
 
-    // 3. Hash the password
-    // const hashedPassword = await bcrypt.hash(password, 10);
+//     }
 
-    // 4. Generate OTP
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    // const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes expiry
+//     // 3. Hash the password
+//     // const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 5. Save the new user in the database
-    const newUser = await User.create({
-        firstName,
-        lastName,
-        email,
-        password: password,
-        otp: otp
-    });
+//     // 4. Generate OTP
+//     const otp = Math.floor(100000 + Math.random() * 900000).toString();
+//     // const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes expiry
 
-    //check 
+//     // 5. Save the new user in the database
+//     const newUser = await User.create({
+//         firstName,
+//         lastName,
+//         email,
+//         password: password,
+//         otp: otp
+//     });
 
-    // 6. Send verification email
-   const emailResponse =  await sendEmailVerificationOtp(newUser.email, newUser.firstName, otp);
+//     //check 
 
-   console.log("Email response : " , emailResponse);
+//     // 6. Send verification email
+//    const emailResponse =  await sendEmailVerificationOtp(newUser.email, newUser.firstName, otp);
+
+//    console.log("Email response : " , emailResponse);
 
 
-    // 7. Send success response
+//     // 7. Send success response
     
-    return res
-        .status(201)
-        .json(
-            new ApiResponse(
-                201, 
-                {
-                    userId: newUser.student_id,
-                    email: newUser.email,
-                },
-                "User registered successfully. Please check your email to verify your account."
-            )
-        );
+//     return res
+//         .status(201)
+//         .json(
+//             new ApiResponse(
+//                 201, 
+//                 {
+//                     userId: newUser.student_id,
+//                     email: newUser.email,
+//                 },
+//                 "User registered successfully. Please check your email to verify your account."
+//             )
+//         );
+// });
+
+//singup with unverify email agin with send otp
+const userSignup = asyncWraper(async (req, res) => {
+  const { firstName, lastName, email, password } = req.body;
+
+  // 1. Validate fields
+  if (!firstName || !lastName || !email || !password) {
+    throw new ApiError(400, "Validation Error", "All fields are required!");
+  }
+
+  // 2. Check existing user
+  const existingUser = await User.findOne({ email });
+
+  // If verified → already registered
+  if (existingUser && existingUser.verified) {
+    throw new ApiError(409, "Validation Error", "User with this email already exists.");
+  }
+
+  // Generate OTP
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+  let user;
+
+  if (existingUser && !existingUser.verified) {
+    // 🔁 User exists but not verified → update OTP and resend
+    existingUser.otp = otp;
+    existingUser.firstName = firstName;
+    existingUser.lastName = lastName;
+    existingUser.password = password;
+    await existingUser.save();
+
+    user = existingUser;
+  } else {
+    // 🆕 Create new user
+    user = await User.create({
+      firstName,
+      lastName,
+      email,
+      password,
+      otp,
+    });
+  }
+
+  // 6. Send OTP email
+  const emailResponse = await sendEmailVerificationOtp(user.email, user.firstName, otp);
+  console.log("Email response:", emailResponse);
+
+  // 7. Response
+  return res.status(201).json(
+    new ApiResponse(
+      201,
+      {
+        userId: user.student_id,
+        email: user.email,
+      },
+      existingUser
+        ? "OTP resent. Please verify your email."
+        : "User registered successfully. Please check your email to verify your account."
+    )
+  );
 });
+
 
 
 //user login
