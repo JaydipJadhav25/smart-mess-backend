@@ -1,12 +1,11 @@
 import { Router } from "express";
 import { feedbackAnalytics, findeFeedbackBydate } from "../controllers/feedback.controllers.js";
-import { FeedbackModel } from "../model/feedback.model.js";
+
 
 
 const router = Router();
 
 router.get("/" ,async(req, res)=>{
-
     return res.json({
         message : "this is feedback route" 
     })
