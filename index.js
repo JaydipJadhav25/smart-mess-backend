@@ -1,12 +1,13 @@
 import dotenv from 'dotenv'
 dotenv.config();//configer env varibles
-import express from "express"
+import express, { response } from "express"
 import cors from "cors"
 import { dbConnect } from './db/dbConnet.js';
 import feedbackRouter from "./routes/feedback.routes.js"
 import userRouter from "./routes/user.routes.js"
 import { userAuth } from './middlewares/authMiddlewares.js';
 import applicationRoutes from "./routes/application.routes.js"
+import menuRouter from "./routes/mealMenu.routes.js"
 
 
 
@@ -41,6 +42,7 @@ app.get("/" , async(req , res)=>{
 //routes :////////////////////////////
 //feedback router/////////////////
 app.use("/feedback" , feedbackRouter);
+app.use("/menu" , menuRouter)
 app.use("/user" , userRouter);
 app.use("/user/appplication" , userAuth , applicationRoutes);
 
@@ -71,6 +73,12 @@ app.use((err, req, res, next) => {
 
 });
 
+
+
+
+
+
+ 
 
 
 app.listen(process.env.PORT ,()=>{

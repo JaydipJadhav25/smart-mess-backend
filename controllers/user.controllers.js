@@ -101,7 +101,7 @@ console.log("otp is  :" , otp);
 //         );
 // });
 
-//singup with unverify email agin with send otp
+
 const userSignup = asyncWraper(async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
