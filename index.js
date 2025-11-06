@@ -8,7 +8,7 @@ import userRouter from "./routes/user.routes.js"
 import { userAuth } from './middlewares/authMiddlewares.js';
 import applicationRoutes from "./routes/application.routes.js"
 import menuRouter from "./routes/mealMenu.routes.js"
-import attendancRouter from "./routes/attendance.routes.js"
+// import attendancRouter from "./routes/attendance.routes.js"
 
 
 
