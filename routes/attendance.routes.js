@@ -1,19 +1,19 @@
-// import { Router } from "express";
-// import { getAllAttendaces, getAttendaceByDate  } from "../controllers/attendace.controller.js";
+import { Router } from "express";
+import { getAllAttendaces, getAttendaceByDate  } from "../controllers/attendace.controller.js";
 
 
 
-// const router = Router()
+const routerr = Router()
 
 
-// router.get("/" , (req , res)=>{
-//     return res.json({
-//         message : "This is Attendace Routes!"
-//     })
-// })
+routerr.get("/" , (req , res)=>{
+    return res.json({
+        message : "This is Attendace Routes!"
+    })
+})
 
-// router.get("/all" , getAllAttendaces);
-// router.get("/date" , getAttendaceByDate);
+routerr.get("/all" , getAllAttendaces);
+routerr.get("/date" , getAttendaceByDate);
 
 
-// export default router;
+export default routerr;
