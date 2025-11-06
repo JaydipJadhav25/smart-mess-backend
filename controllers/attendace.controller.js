@@ -4,12 +4,12 @@ import { asyncWraper } from "../utils/AsyncWraper.js";
 
 
 
-const getAttendaces =  asyncWraper(async(req , res)=>{
+const getAllAttendaces =  asyncWraper(async(req , res)=>{
 
     const  responce = await Attendence.find();
 
     if(!responce){
-             throw new ApiError(400, "Server Error", "something went wrong!");
+        throw new ApiError(400, "Server Error", "something went wrong!");
     }
 
 
@@ -19,9 +19,32 @@ const getAttendaces =  asyncWraper(async(req , res)=>{
     
 })
 
+const getAttendaceByDate = asyncWraper(async(req, res)=>{
+
+ const date = req.query.date;
+
+ if(!date){
+    throw new ApiError(400, "Validation Error", "Date is Requried!");
+    
+ }
+
+
+ //find is db
+ const attendace = await Attendence.findOne({date : date});
+
+ if(!attendace){
+        throw new ApiError(400, "Server Error", "something went wrong!");
+}
+
+
+return res.status(201).json(attendace);
+
+
+})
 
 
 
 export{
-    getAttendaces
+    getAllAttendaces,
+    getAttendaceByDate
 }
