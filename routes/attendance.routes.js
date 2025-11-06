@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllAttendaces  } from "../controllers/attendace.controller.js";
+import { getAllAttendaces, getAttendaceByDate  } from "../controllers/attendace.controller.js";
 
 
 
@@ -13,7 +13,7 @@ router.get("/" , (req , res)=>{
 })
 
 router.get("/all" , getAllAttendaces);
-// router.get("/date" , getAttendaceByDate);
+router.get("/date" , getAttendaceByDate);
 
 
 export default router;
