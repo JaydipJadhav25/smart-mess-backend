@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 dotenv.config();//configer env varibles
-import express   from "express"
+import express from "express"
 import cors from "cors"
 import { dbConnect } from './db/dbConnet.js';
 import feedbackRouter from "./routes/feedback.routes.js"
@@ -42,8 +42,8 @@ app.get("/" , async(req , res)=>{
 
 //routes :////////////////////////////
 // router/////////////////
-// app.use("/feedback" , feedbackRouter);
-app.use("/attendace" , attendancRouter);
+app.use("/feedback" , feedbackRouter);
+// app.use("/attendace" , attendancRouter);
 app.use("/menu" , menuRouter)
 app.use("/user" , userRouter);
 app.use("/user/appplication" , userAuth , applicationRoutes);
