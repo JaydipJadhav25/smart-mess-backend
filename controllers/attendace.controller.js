@@ -1,4 +1,6 @@
+
 import { Attendence } from "../model/Attendace.js";
+import { ApiError } from "../utils/ApiError.js";
 // import { ApiResponse } from "../utils/ApiResponce.js";
 import { asyncWraper } from "../utils/AsyncWraper.js";
 
@@ -22,6 +24,9 @@ const getAllAttendaces =  asyncWraper(async(req , res)=>{
 const getAttendaceByDate = asyncWraper(async(req, res)=>{
 
  const date = req.query.date;
+
+
+ console.log(date);
 
  if(!date){
     throw new ApiError(400, "Validation Error", "Date is Requried!");
