@@ -42,7 +42,7 @@ app.get("/" , async(req , res)=>{
 
 //routes :////////////////////////////
 // router/////////////////
-app.use("/feedback" , feedbackRouter);
+// app.use("/feedback" , feedbackRouter);
 app.use("/attendace" , attendancRouter);
 app.use("/menu" , menuRouter)
 app.use("/user" , userRouter);
