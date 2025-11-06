@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 dotenv.config();//configer env varibles
-import express, { response } from "express"
+import express   from "express"
 import cors from "cors"
 import { dbConnect } from './db/dbConnet.js';
 import feedbackRouter from "./routes/feedback.routes.js"
