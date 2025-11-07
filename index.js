@@ -42,11 +42,11 @@ app.get("/" , async(req , res)=>{
 
 //routes :////////////////////////////
 // router/////////////////
-app.use("/feedback" , feedbackRouter);
-app.use("/menu" , menuRouter)
-app.use("/user" , userRouter);
-app.use("/user/appplication" , userAuth , applicationRoutes);
-app.use("/attendace" , attendancRouter);
+// app.use("/feedback" , feedbackRouter);
+// app.use("/menu" , menuRouter)
+// app.use("/user" , userRouter);
+// app.use("/user/appplication" , userAuth , applicationRoutes);
+// app.use("/attendace" , attendancRouter);
 
 
 
