@@ -3,17 +3,17 @@ import { getAllAttendaces, getAttendaceByDate  } from "../controllers/attendace.
 
 
 
-const routerr = Router()
+const router = Router()
 
 
-routerr.get("/" , (req , res)=>{
+router.get("/" , (req , res)=>{
     return res.json({
         message : "This is Attendace Routes!"
     })
 })
 
-routerr.get("/all" , getAllAttendaces);
-routerr.get("/date" , getAttendaceByDate);
+router.get("/all" , getAllAttendaces);
+router.get("/date" , getAttendaceByDate);
 
 
-export default routerr;
+export default router;
