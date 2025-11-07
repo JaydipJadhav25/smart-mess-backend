@@ -44,7 +44,7 @@ app.get("/" , async(req , res)=>{
 // router/////////////////
 // app.use("/feedback" , feedbackRouter);
 // app.use("/menu" , menuRouter)
-app.use("/user" , userRouter);
+// app.use("/user" , userRouter);
 // app.use("/user/appplication" , userAuth , applicationRoutes);
 // app.use("/attendance" ,  attendanceRouter);
 
