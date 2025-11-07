@@ -7,8 +7,8 @@ import { dbConnect } from './db/dbConnet.js';
 // import userRouter from "./routes/user.routes.js"
 // import { userAuth } from './middlewares/authMiddlewares.js';
 // import applicationRoutes from "./routes/application.routes.js"
-// import menuRouter from "./routes/mealMenu.routes.js"
-import attendanceRouter from "./routes/attendance.routes.js"
+import menuRouter from "./routes/mealMenu.routes.js"
+// import attendanceRouter from "./routes/attendance.routes.js"
 
 
 
@@ -44,9 +44,9 @@ app.get("/" , async(req , res)=>{
 // router/////////////////
 // app.use("/feedback" , feedbackRouter);
 // app.use("/menu" , menuRouter)
-// app.use("/user" , userRouter);
+app.use("/user" , userRouter);
 // app.use("/user/appplication" , userAuth , applicationRoutes);
-app.use("/attendance" ,  attendanceRouter);
+// app.use("/attendance" ,  attendanceRouter);
 
 
 
