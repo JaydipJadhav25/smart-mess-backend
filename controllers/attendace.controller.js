@@ -1,5 +1,4 @@
-
-import { Attendence } from "../model/Attendace.js";
+import { Attendence } from "../model/attendance.model.js";
 import { ApiError } from "../utils/ApiError.js";
 // import { ApiResponse } from "../utils/ApiResponce.js";
 import { asyncWraper } from "../utils/AsyncWraper.js";
