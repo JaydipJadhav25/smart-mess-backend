@@ -1,4 +1,4 @@
-import { ApiError } from "@google/genai";
+import { ApiError } from "../utils/ApiError.js";
 import { DailyMenu } from "../model/Menu.model.js";
 import { asyncWraper } from "../utils/AsyncWraper.js";
 import { ApiResponse } from "../utils/ApiResponce.js";

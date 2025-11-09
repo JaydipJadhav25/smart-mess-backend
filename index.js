@@ -9,7 +9,7 @@ import { userAuth } from './middlewares/authMiddlewares.js';
 import applicationRoutes from "./routes/application.routes.js"
 import menuRouter from "./routes/mealMenu.routes.js"
 import attendanceRouter from "./routes/attendance.routes.js"
-
+import recipeRouter from "./routes/recipe.routes.js"
 
 
 //database connecction
@@ -47,6 +47,11 @@ app.use("/menu" , menuRouter)
 app.use("/user" , userRouter);
 app.use("/user/appplication" , userAuth , applicationRoutes);
 app.use("/attendance" ,  attendanceRouter);
+app.use("/recipe" , recipeRouter);
+
+
+
+
 
 
 
