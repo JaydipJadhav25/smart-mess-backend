@@ -14,6 +14,7 @@ const studentApplicationSchema = new Schema({
         ref: 'User', // This links to your 'User' model
         required: true
     },
+
     formStatus: {
         type: String,
         enum: ['pending', 'reviewed', 'approved', 'rejected'],
@@ -33,6 +34,9 @@ const studentApplicationSchema = new Schema({
         type: String,
         required: [true, 'Name is required'],
         trim: true
+    },
+    student_id: {
+      type: Number,
     },
     email: {
         type: String,

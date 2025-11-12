@@ -231,8 +231,6 @@ const userLogout  = asyncWraper(async(req , res) =>{
     //clear cookis
 
 
-
-
       return res
         .status(200)
         .clearCookie("auth")
@@ -248,6 +246,33 @@ const userLogout  = asyncWraper(async(req , res) =>{
 })
 
 
+
+
+const getUserById = asyncWraper(async(req, res)=>{
+//    const stundent_id = req.params.id;
+
+
+  const existingUser = req.user;
+
+  if (!existingUser) {
+    throw new ApiError(400, "Invalid Request", "Id is required!");
+  }
+
+  //return use 
+  const user = await User.findOne({
+    email : existingUser.email
+  }).select("-password");
+
+
+   if (!user) {
+    throw new ApiError(400, "Server Error", "User is Not Found!");
+  }
+
+
+  return res.status(200).json(user);
+
+
+});
 
 
 
@@ -311,5 +336,6 @@ export {
     userSignup,
     userLogin ,
     verifyEmail,
-    userLogout
+    userLogout,
+    getUserById
 }

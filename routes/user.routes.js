@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {  userLogin, userLogout, userSignup, verifyEmail } from "../controllers/user.controllers.js";
+import {  getUserById, userLogin, userLogout, userSignup, verifyEmail } from "../controllers/user.controllers.js";
 import { userAuth } from "../middlewares/authMiddlewares.js";
 
 
@@ -14,8 +14,8 @@ router.get("/" ,async(req, res)=>{
 router.post("/verify" , verifyEmail);
 router.post("/signup" , userSignup);
 router.post("/login" , userLogin );
-
 router.get("/logout" , userAuth , userLogout);
+router.get("/myProfile" , userAuth , getUserById);
 
 
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { applicationCreate } from "../controllers/applicationForm.js";
+import {  applicationCreate, getUserApplication } from "../controllers/applicationForm.js";
 
 
 
@@ -12,6 +12,10 @@ router.get("/" , (req , res)=>{
 })
 
 router.post("/create" , applicationCreate);
+// router.get("/all" , getAllAplication);
+// router.post("/comform" , accepteApplication);
+
+router.get("/get" , getUserApplication);
 
 
 export default router;
