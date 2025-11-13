@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config();//configer env varibles
 import express from "express"
 import cors from "cors"
+import moment from 'moment';
 import { dbConnect } from './db/dbConnect.js';
 import feedbackRouter from "./routes/feedback.routes.js"
 import userRouter from "./routes/user.routes.js"
@@ -10,6 +11,8 @@ import applicationRoutes from "./routes/application.routes.js"
 import menuRouter from "./routes/mealMenu.routes.js"
 import attendanceRouter from "./routes/attendance.routes.js"
 import recipeRouter from "./routes/recipe.routes.js"
+import adminRouter from "./routes/admin.routes.js"
+import feeRecordsRouter from "./routes/fees.routes.js"
 import openRouter from "./routes/open.routes.js"
 
 //database connecction
@@ -34,8 +37,10 @@ app.use(express.urlencoded({extended : true}));
 
 
 app.get("/" , async(req , res)=>{
+  const currentMonth = moment().format("MMMM YYYY DD"); 
     return res.json({
         text : "smart mess system" , 
+        currentMonth
     });
 })
 
@@ -49,9 +54,13 @@ app.use("/user/appplication" , userAuth , applicationRoutes);
 app.use("/attendance" ,  attendanceRouter);
 app.use("/recipe" , recipeRouter);
 
+//open
+ app.use("/open" , openRouter);
+
 
 //admin
-app.use("/admin" , openRouter );
+app.use("/admin" , adminRouter );
+app.use("/admin/fees" , feeRecordsRouter);
 
 
 

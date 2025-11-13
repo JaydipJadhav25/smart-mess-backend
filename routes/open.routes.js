@@ -1,17 +1,14 @@
 import { Router } from "express";
-import { accepteApplication, deleteApplication, getAllAplication, getApplicationById } from "../controllers/applicationForm.js";
+import { getStudentFeesRecordsById } from "../controllers/fess.controller.js";
 
 
 
 const router = Router();
 
 
-//application for
-router.get("/application/all" , getAllAplication);
-router.get("/application/review/:id" , getApplicationById);
-router.get("/application/update/:id" , accepteApplication);
-router.delete("/application/delete/:id" , deleteApplication);
 
+// get fees records by id
+router.get("/fees/records/:id" ,  getStudentFeesRecordsById);
 
 
 
