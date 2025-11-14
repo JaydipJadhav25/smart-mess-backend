@@ -58,7 +58,7 @@ const  studentAddFees = asyncWraper(async(req , res)=>{
 
 
  //send sms
-  const smsResponce = await createMessage(mobile, studentName);
+  const smsResponce = await createMessage(Number(mobile), studentName);
 
    // if(!smsResponce.success){
    //  throw new ApiError(500 , "Server Error" ,  " Error adding fee")

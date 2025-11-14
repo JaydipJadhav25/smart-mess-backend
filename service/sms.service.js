@@ -6,7 +6,7 @@ const accountSid ="AC42296b792fa8bbfa1f3e9c779c4539a6";
 const authToken ="41734cdee7c1c9bd734e4efba9376f69";
 const client = twilio(accountSid, authToken);
 
-export async function createMessage(number=7249824513) {
+export async function createMessage(number) {
         try {
 
             console.log("number is : " , number);
@@ -19,7 +19,7 @@ export async function createMessage(number=7249824513) {
             });
 
 
-            console.log(message);
+            // console.log(message);
             
             return {
                 success : true,
