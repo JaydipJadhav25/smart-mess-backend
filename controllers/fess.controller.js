@@ -3,6 +3,7 @@ import { asyncWraper } from "../utils/AsyncWraper.js";
 import { ApiResponse } from "../utils/ApiResponce.js";
 import { FeeModel } from "../model/fees.model.js";
 import moment from "moment";
+import { createMessage } from "../service/sms.service.js";
 
 
 
@@ -10,10 +11,10 @@ import moment from "moment";
 
 
 const  studentAddFees = asyncWraper(async(req , res)=>{
- const {  user , student_Id, studentName, studentEmail, month, amount, method } = req.body;
+ const {  user , student_Id, studentName, studentEmail, month, amount, method , mobile} = req.body;
 
 
- if(!user || !studentName || !studentEmail || !student_Id || !month || !amount || !method){
+ if(!user || !studentName || !studentEmail || !student_Id || !month || !amount || !method ){
     throw new ApiError(400 , "Invalide Error" ,  "All fileds are required !")
  }
 
@@ -54,6 +55,16 @@ const  studentAddFees = asyncWraper(async(req , res)=>{
  if(!record){
     throw new ApiError(500 , "Database Error" ,  " Error adding fee")
  }
+
+
+ //send sms
+  const smsResponce = await createMessage(mobile, studentName);
+
+   // if(!smsResponce.success){
+   //  throw new ApiError(500 , "Server Error" ,  " Error adding fee")
+   // }
+
+   // console.log("sms send : " , smsResponce);
 
 
  return res.status(200)

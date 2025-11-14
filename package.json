@@ -23,6 +23,7 @@
     "mongoose": "^8.19.0",
     "nodemailer": "^7.0.9",
     "nodemon": "^3.1.10",
-    "openai": "^6.8.1"
+    "openai": "^6.8.1",
+    "twilio": "^5.10.5"
   }
 }

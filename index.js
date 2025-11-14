@@ -15,6 +15,7 @@ import adminRouter from "./routes/admin.routes.js"
 import feeRecordsRouter from "./routes/fees.routes.js"
 import openRouter from "./routes/open.routes.js"
 
+
 //database connecction
 await dbConnect();
 
@@ -38,9 +39,10 @@ app.use(express.urlencoded({extended : true}));
 
 app.get("/" , async(req , res)=>{
   const currentMonth = moment().format("MMMM YYYY DD"); 
+  // const response = await createMessage(7249824513 , "jaydip jadhav");
     return res.json({
         text : "smart mess system" , 
-        currentMonth
+        currentMonth,
     });
 })
 
