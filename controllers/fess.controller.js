@@ -21,7 +21,8 @@ const  studentAddFees = asyncWraper(async(req , res)=>{
     //check alreay paied
     const existing = await FeeModel.findOne({
         student_Id : student_Id,
-        month : month
+        month : month,
+        status : "paid"
     });
 
     // const currentMonth = moment().format("MMMM");
@@ -35,9 +36,11 @@ const  studentAddFees = asyncWraper(async(req , res)=>{
     // throw new ApiError(400 , "Invalide Error" ,  "Student Alreay paid This month!");
     // }
 
-       if( existing ){
-    throw new ApiError(400 , "Invalide Error" ,  "Student Alreay paid This month!");
-    }
+       if(existing && existing.status === "paid"){
+
+        throw new ApiError(400 , "Invalide Error" ,  "Student Alreay paid This month!");
+
+       }
 
 
     const record = await FeeModel.create({
@@ -65,6 +68,8 @@ const  studentAddFees = asyncWraper(async(req , res)=>{
    // }
 
    // console.log("sms send : " , smsResponce);
+
+   //////update  in user record
 
 
  return res.status(200)

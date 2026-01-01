@@ -40,7 +40,7 @@ const FeesSchema = new mongoose.Schema({
 
   status: {
     type: String,
-    enum: ["paid", "pending"],
+    enum: ["paid", "pending" , "failed"],
     default: "paid",
   },
   method: {
@@ -48,12 +48,18 @@ const FeesSchema = new mongoose.Schema({
     enum :["cash" , "upi" , "online"],
     default : "cash"
   },
-
+  razorpay_Order_Id : {
+    type : String,
+    default : null
+  },
+  razorpay_Payment_Id :{
+    type: String,
+    default : null
+  },
   paymentDate: {
     type: Date,
     default: Date.now,
   },
-
   createdAt: {
     type: Date,
     default: Date.now,

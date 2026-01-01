@@ -14,7 +14,7 @@ import recipeRouter from "./routes/recipe.routes.js"
 import adminRouter from "./routes/admin.routes.js"
 import feeRecordsRouter from "./routes/fees.routes.js"
 import openRouter from "./routes/open.routes.js"
-
+import paymentRouter from "./routes/payment.routes.js"
 
 //database connecction
 await dbConnect();
@@ -55,6 +55,7 @@ app.use("/user" , userRouter);
 app.use("/user/appplication" , userAuth , applicationRoutes);
 app.use("/attendance" ,  attendanceRouter);
 app.use("/recipe" , recipeRouter);
+app.use("/user/payment" , userAuth , paymentRouter);
 
 //open
  app.use("/open" , openRouter);

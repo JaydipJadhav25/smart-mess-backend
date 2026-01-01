@@ -1,11 +1,5 @@
 import mongoose , {Schema} from "mongoose";
 
-/**
- * This schema assumes you have a 'User' model.
- * The 'user' field will store the ObjectId of the student 
- * who is filling out this application form.
- */
-
 const studentApplicationSchema = new Schema({
     
     // --- Form Management (Your new fields) ---
@@ -158,7 +152,6 @@ const studentApplicationSchema = new Schema({
         type: String,
         required: true,
         trim: true
-        // You can add validation for length (6)
     },
 
     // --- Hostel / Mess Details ---
@@ -179,12 +172,9 @@ const studentApplicationSchema = new Schema({
         default: ''
     }
 }, {
-    // This is a good practice.
-    // It automatically adds `createdAt` and `updatedAt` fields.
-    // `createdAt` will be very similar to your `formSubmitDate`.
     timestamps: true 
 });
 
-// Create and export the model
+
 export const StudentApplication = mongoose.model('StudentApplication', studentApplicationSchema);
 

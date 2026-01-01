@@ -262,8 +262,6 @@ const getUserById = asyncWraper(async(req, res)=>{
   const user = await User.findOne({
     email : existingUser.email
   }).select("-password");
-
-
    if (!user) {
     throw new ApiError(400, "Server Error", "User is Not Found!");
   }
