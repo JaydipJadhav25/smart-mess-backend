@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { accepteApplication, deleteApplication, getAllAplication, getApplicationById } from "../controllers/applicationForm.js";
+import { addAnnouncements, deleteAnnouncement, updateAnnouncements } from "../controllers/announcement.controller.js";
 
 
 
@@ -14,6 +15,10 @@ router.delete("/application/delete/:id" , deleteApplication);
 
 
 
+//announcements routes
+router.post("/add/announcements" , addAnnouncements);
+router.post("/delete/announcements" , deleteAnnouncement);
+router.post("/update/announcements" , updateAnnouncements);
 
 
 

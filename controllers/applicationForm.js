@@ -14,8 +14,9 @@ const  applicationCreate = asyncWraper(
     //1. extrack current user
     const user = req.user;
     if(!user){
-     throw new ApiError( "UnAuthorized Access!" ," User is Requried" ,401);
+     throw new ApiError(401 ,  "UnAuthorized Access!" ," User is Requried");
     }
+
     // create application
     const data = req.body;
 
@@ -23,7 +24,7 @@ const  applicationCreate = asyncWraper(
 
     //cehck
     if(!data){
-        throw new ApiError("User Data Is Requried!");
+        throw new ApiError(404 , " Invalide Fileds" , "User Data Is Requried!");
     }
     //sava in db
     const application = await StudentApplication.create({
@@ -34,7 +35,7 @@ const  applicationCreate = asyncWraper(
     });
 
     if(!application){
-        throw new ApiError("User Application save Error!");
+        throw new ApiError(500 , "server Error" , "User Application save Error!");
     }
     //update is user profile
    await User.findByIdAndUpdate(user._id ,{

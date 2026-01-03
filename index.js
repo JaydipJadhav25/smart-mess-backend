@@ -16,6 +16,7 @@ import feeRecordsRouter from "./routes/fees.routes.js"
 import openRouter from "./routes/open.routes.js"
 import paymentRouter from "./routes/payment.routes.js"
 
+
 //database connecction
 await dbConnect();
 
@@ -49,21 +50,21 @@ app.get("/" , async(req , res)=>{
 
 //routes :////////////////////////////
 // router/////////////////
-app.use("/feedback" , feedbackRouter);
 app.use("/menu" , menuRouter)
 app.use("/user" , userRouter);
 app.use("/user/appplication" , userAuth , applicationRoutes);
-app.use("/attendance" ,  attendanceRouter);
-app.use("/recipe" , recipeRouter);
 app.use("/user/payment" , userAuth , paymentRouter);
 
 //open
- app.use("/open" , openRouter);
+app.use("/open" , openRouter);
 
 
 //admin
 app.use("/admin" , adminRouter );
 app.use("/admin/fees" , feeRecordsRouter);
+app.use("/attendance" ,  attendanceRouter);
+app.use("/feedback" , feedbackRouter);
+app.use("/recipe" , recipeRouter);
 
 
 
