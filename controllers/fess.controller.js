@@ -105,7 +105,7 @@ const currentFeeRecords = asyncWraper(async(req , res)=>{
 
 
 
-//get praticlur records
+//get praticlur records of user
 const getStudentFeesRecordsById = asyncWraper(async(req , res)=>{
     const id = req.params.id;
      if(!id){
@@ -123,9 +123,22 @@ const getStudentFeesRecordsById = asyncWraper(async(req , res)=>{
 })
 
 
+//get fee record based on feeid
+const getFeesRecordsById = asyncWraper(async(req , res)=>{
+    const id = req.params.id;
+     if(!id){
+    throw new ApiError(400 , "Invalide Error" ,  "Id are required !")
+     }
+
+     //finde and return
+     const record = await FeeModel.findOne({_id : id});
+      return res.status(200).json(record);
+})
+
  export {
     studentAddFees,
     allFeesRecords,
     currentFeeRecords,
-    getStudentFeesRecordsById
+    getStudentFeesRecordsById,
+    getFeesRecordsById
 }

@@ -59,6 +59,7 @@ app.use("/user/payment" , userAuth , paymentRouter);
 app.use("/open" , openRouter);
 
 
+
 //admin
 app.use("/admin" , adminRouter );
 app.use("/admin/fees" , feeRecordsRouter);
