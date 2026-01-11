@@ -13,7 +13,6 @@ export const userAuth = asyncWraper(async (req, res, next) => {
   const token = authHeader?.startsWith("Bearer ")
     ? authHeader.split(" ")[1]
     : req.cookies?.token;
-
   if (!token) {
     throw new ApiError(401, "Unauthorized", "Unauthorized Acesss ,No token provided");
   }
@@ -40,5 +39,18 @@ export const userAuth = asyncWraper(async (req, res, next) => {
   // Attach user to request
   req.user = user;
 
+  next();
+});
+
+
+//this for admin
+export const checkAdmin = asyncWraper(async (req, res, next) => {
+  if (!req.user) {
+    throw new ApiError(401, "Unauthorized", "Authentication required");
+  }
+
+  if (req.user.role !== "admin") {
+    throw new ApiError(403, "Forbidden", "Admin access only");
+  }
   next();
 });

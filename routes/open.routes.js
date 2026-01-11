@@ -11,6 +11,7 @@ const router = Router();
 
 // get fees records by id
 router.get("/fees/records/:id" ,  getStudentFeesRecordsById);
+
 ///get fee record based on fee id
 router.get("/fee/record/:id" , getFeesRecordsById);
 

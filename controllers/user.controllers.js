@@ -181,10 +181,17 @@ const userLogin = asyncWraper(async (req, res) => {
     if (!user) {
         throw new ApiError(404, "validation Error","User not found. Please check your email or sign up.");
     }
+  
+
 
     // 3. Main check: Ensure the user's account is verified
     if (!user.verified) { // Assuming you have an 'isVerified' field in your User model
         throw new ApiError(403,  "validation Error" , "Account not verified. Please check your email for the verification OTP.");
+    }
+
+      //check admin login
+    if (user.role !== "student") {
+        throw new ApiError(404, "validation Error","Unauthorized access. Please log in with an admin account!.");
     }
 
     // 4. Check if the password is correct
@@ -200,6 +207,7 @@ const userLogin = asyncWraper(async (req, res) => {
         student_id : user.student_id,
         email: user.email,
         firstName: user.firstName,
+        role : "student"
     }, process.env.ACCESS_TOKEN_SECRET);
 
     const loggedInUser = await User.findById(user._id).select("-password");
@@ -225,11 +233,9 @@ const userLogin = asyncWraper(async (req, res) => {
 });
 
 
-//user login
+//user logout
 const userLogout  = asyncWraper(async(req , res) =>{
-
     //clear cookis
-
 
       return res
         .status(200)

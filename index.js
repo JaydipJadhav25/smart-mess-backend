@@ -6,7 +6,7 @@ import moment from 'moment';
 import { dbConnect } from './db/dbConnect.js';
 import feedbackRouter from "./routes/feedback.routes.js"
 import userRouter from "./routes/user.routes.js"
-import { userAuth } from './middlewares/authMiddlewares.js';
+import { checkAdmin, userAuth } from './middlewares/authMiddlewares.js';
 import applicationRoutes from "./routes/application.routes.js"
 import menuRouter from "./routes/mealMenu.routes.js"
 import attendanceRouter from "./routes/attendance.routes.js"
@@ -15,6 +15,7 @@ import adminRouter from "./routes/admin.routes.js"
 import feeRecordsRouter from "./routes/fees.routes.js"
 import openRouter from "./routes/open.routes.js"
 import paymentRouter from "./routes/payment.routes.js"
+import adminAccessRouter from "./routes/adminAccess.routes.js"
 
 
 //database connecction
@@ -60,12 +61,17 @@ app.use("/open" , openRouter);
 
 
 
+
+//admin login 
+app.use("/admin/access" , adminAccessRouter);
+
 //admin
-app.use("/admin" , adminRouter );
-app.use("/admin/fees" , feeRecordsRouter);
-app.use("/attendance" ,  attendanceRouter);
-app.use("/feedback" , feedbackRouter);
-app.use("/recipe" , recipeRouter);
+app.use("/admin" , userAuth  , checkAdmin ,  adminRouter);
+app.use("/admin/fees" ,userAuth , checkAdmin, feeRecordsRouter);
+app.use("/attendance" ,userAuth , checkAdmin ,   attendanceRouter);
+app.use("/feedback" ,userAuth , checkAdmin, feedbackRouter);
+app.use("/recipe" ,userAuth , checkAdmin ,  recipeRouter);
+
 
 
 
