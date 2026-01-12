@@ -4,6 +4,7 @@ import { ApiResponse } from "../utils/ApiResponce.js";
 import { FeeModel } from "../model/fees.model.js";
 import moment from "moment";
 import { createMessage } from "../service/sms.service.js";
+import { recordFeeOnBlockchain } from "../service/blockchain.service.js";
 
 
 
@@ -52,13 +53,21 @@ const  studentAddFees = asyncWraper(async(req , res)=>{
       amount,
       method,
       status: "paid",
-    })
+    });
 
     
  if(!record){
     throw new ApiError(500 , "Database Error" ,  " Error adding fee")
  }
 
+ //after add on blockchain
+ const {blockNumber , txHash } = await recordFeeOnBlockchain(Number(student_Id ), record._id.toString(), Number(amount), method);
+  
+ //update this record
+
+ record.blockNumber = blockNumber;
+ record.hash = txHash;
+ await record.save();
 
  //send sms
   const smsResponce = await createMessage(mobile, studentName);
@@ -116,7 +125,6 @@ const getStudentFeesRecordsById = asyncWraper(async(req , res)=>{
      const records = await FeeModel.find({
         student_Id : id
      });
-
 
       return res.status(200).json(records);
 

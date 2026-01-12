@@ -18,6 +18,7 @@ import paymentRouter from "./routes/payment.routes.js"
 import adminAccessRouter from "./routes/adminAccess.routes.js"
 
 
+
 //database connecction
 await dbConnect();
 
@@ -47,6 +48,7 @@ app.get("/" , async(req , res)=>{
         currentMonth,
     });
 })
+
 
 
 //routes :////////////////////////////

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const FeesSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -64,6 +65,15 @@ const FeesSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  hash :{
+    type : String,
+    default : null
+  },
+  blockNumber : {
+    type : Number,
+    default  :null
+  },
+
 });
 
 export const FeeModel = mongoose.model("Fee", FeesSchema);
