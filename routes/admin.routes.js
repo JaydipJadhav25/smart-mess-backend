@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { accepteApplication, deleteApplication, getAllAplication, getApplicationById } from "../controllers/applicationForm.js";
 import { addAnnouncements, deleteAnnouncement, updateAnnouncements } from "../controllers/announcement.controller.js";
+import { getTodayMessLeaves } from "../controllers/leave.controller.js";
 
 
 
@@ -19,6 +20,10 @@ router.delete("/application/delete/:id" , deleteApplication);
 router.post("/add/announcements" , addAnnouncements);
 router.post("/delete/announcements" , deleteAnnouncement);
 router.post("/update/announcements" , updateAnnouncements);
+
+
+//get all leaves 
+router.get("/leaves/today" , getTodayMessLeaves)
 
 
 

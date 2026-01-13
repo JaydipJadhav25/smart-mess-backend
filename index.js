@@ -16,7 +16,7 @@ import feeRecordsRouter from "./routes/fees.routes.js"
 import openRouter from "./routes/open.routes.js"
 import paymentRouter from "./routes/payment.routes.js"
 import adminAccessRouter from "./routes/adminAccess.routes.js"
-
+import studentLeave from "./routes/leave.routes.js"
 
 
 //database connecction
@@ -57,6 +57,7 @@ app.use("/menu" , menuRouter)
 app.use("/user" , userRouter);
 app.use("/user/appplication" , userAuth , applicationRoutes);
 app.use("/user/payment" , userAuth , paymentRouter);
+app.use("/user/leave" ,userAuth ,  studentLeave);
 
 //open
 app.use("/open" , openRouter);
