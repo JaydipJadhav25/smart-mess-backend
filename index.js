@@ -17,6 +17,7 @@ import openRouter from "./routes/open.routes.js"
 import paymentRouter from "./routes/payment.routes.js"
 import adminAccessRouter from "./routes/adminAccess.routes.js"
 import studentLeave from "./routes/leave.routes.js"
+import AdminSettings from './model/adminSettings.model.js';
 
 
 //database connecction
@@ -43,9 +44,11 @@ app.use(express.urlencoded({extended : true}));
 app.get("/" , async(req , res)=>{
   const currentMonth = moment().format("MMMM YYYY DD"); 
   // const response = await createMessage(7249824513 , "jaydip jadhav");
+
     return res.json({
         text : "smart mess system" , 
         currentMonth,
+       
     });
 })
 

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { getFeesRecordsById, getStudentFeesRecordsById } from "../controllers/fess.controller.js";
 import { allAnnouncements } from "../controllers/announcement.controller.js";
+import { getAdminSettings } from "../controllers/adminSettings.controller.js";
 
 
 
@@ -19,6 +20,9 @@ router.get("/fee/record/:id" , getFeesRecordsById);
 //get all announcements
 router.get("/announcements" , allAnnouncements);
 
+
+//get open admin settings
+router.get("/admin/settings" ,  getAdminSettings);
 
 
 

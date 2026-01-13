@@ -2,6 +2,7 @@ import { Router } from "express";
 import { accepteApplication, deleteApplication, getAllAplication, getApplicationById } from "../controllers/applicationForm.js";
 import { addAnnouncements, deleteAnnouncement, updateAnnouncements } from "../controllers/announcement.controller.js";
 import { getTodayMessLeaves } from "../controllers/leave.controller.js";
+import { getAdminSettings, toggleFeedback, toggleOnlinePayment } from "../controllers/adminSettings.controller.js";
 
 
 
@@ -25,6 +26,14 @@ router.post("/update/announcements" , updateAnnouncements);
 //get all leaves 
 router.get("/leaves/today" , getTodayMessLeaves)
 
+
+
+
+
+//admin settings
+// router.get("/settings" ,  getAdminSettings);
+router.patch("/settings/toggle-payment" , toggleOnlinePayment);
+router.patch("/settings/toggle-feedback" , toggleFeedback )
 
 
 
