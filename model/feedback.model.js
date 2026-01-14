@@ -16,7 +16,9 @@ const feedbackSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-
+ student_id: {
+ type : Number
+ },
   meal: {
     type: String,
     required: true,
@@ -27,8 +29,6 @@ const feedbackSchema = new mongoose.Schema({
   },
   overallRating: {
     type: Number,
-    min: 1,
-    max: 5,
   },
   itemFeedback: {
     type: Map,

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {  getUserById, userLogin, userLogout, userSignup, verifyEmail } from "../controllers/user.controllers.js";
 import { userAuth } from "../middlewares/authMiddlewares.js";
+import { addFeedback } from "../controllers/feedback.controllers.js";
 
 
 const router = Router();
@@ -17,6 +18,9 @@ router.post("/login" , userLogin );
 router.get("/logout" , userAuth , userLogout);
 router.get("/myProfile" , userAuth , getUserById);
 
+
+//add feedback
+ router.post("/addfeedback" , userAuth ,  addFeedback);
 
 
 
