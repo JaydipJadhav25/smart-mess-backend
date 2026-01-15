@@ -17,7 +17,9 @@ import openRouter from "./routes/open.routes.js"
 import paymentRouter from "./routes/payment.routes.js"
 import adminAccessRouter from "./routes/adminAccess.routes.js"
 import studentLeave from "./routes/leave.routes.js"
-import AdminSettings from './model/adminSettings.model.js';
+import userPlanProfile from "./routes/studentPlanProfile.routes.js"
+
+// import AdminSettings from './model/adminSettings.model.js';
 
 
 //database connecction
@@ -61,11 +63,12 @@ app.use("/user" , userRouter);
 app.use("/user/appplication" , userAuth , applicationRoutes);
 app.use("/user/payment" , userAuth , paymentRouter);
 app.use("/user/leave" ,userAuth ,  studentLeave);
+app.use("/user/plan" ,userAuth , userPlanProfile);
+
+
 
 //open
 app.use("/open" , openRouter);
-
-
 
 
 //admin login 

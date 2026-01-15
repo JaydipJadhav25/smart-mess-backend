@@ -5,7 +5,7 @@ dotenv.config();
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
-// // ✅ Available models: gemini-1.5-flash or gemini-1.5-pro
+// //  Available models: gemini-1.5-flash or gemini-1.5-pro
 const model = genAI.getGenerativeModel({  model: 'gemini-2.0-flash-001' ,
      generationConfig: {
     responseMimeType: "application/json",
