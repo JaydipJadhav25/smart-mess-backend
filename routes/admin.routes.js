@@ -3,6 +3,7 @@ import { accepteApplication, deleteApplication, getAllAplication, getApplication
 import { addAnnouncements, deleteAnnouncement, updateAnnouncements } from "../controllers/announcement.controller.js";
 import { getTodayMessLeaves } from "../controllers/leave.controller.js";
 import { getAdminSettings, toggleFeedback, toggleOnlinePayment } from "../controllers/adminSettings.controller.js";
+import { updateDailyMenu } from "../controllers/mealMenu.controller.js";
 
 
 
@@ -35,6 +36,9 @@ router.get("/leaves/today" , getTodayMessLeaves)
 router.patch("/settings/toggle-payment" , toggleOnlinePayment);
 router.patch("/settings/toggle-feedback" , toggleFeedback )
 
+
+//menu update
+router.put("/menu/:day" , updateDailyMenu);
 
 
 

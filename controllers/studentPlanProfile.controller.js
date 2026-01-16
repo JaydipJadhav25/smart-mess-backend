@@ -6,6 +6,7 @@ import { asyncWraper } from "../utils/AsyncWraper.js";
 
 
 
+
 const createStudentPlaneProfile = asyncWraper(async (req, res) => {
   const { age, gender, height, weight, goal } = req.body;
 

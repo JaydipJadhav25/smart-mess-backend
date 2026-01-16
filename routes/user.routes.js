@@ -16,6 +16,8 @@ router.post("/verify" , verifyEmail);
 router.post("/signup" , userSignup);
 router.post("/login" , userLogin );
 router.get("/logout" , userAuth , userLogout);
+
+//get user profile
 router.get("/myProfile" , userAuth , getUserById);
 
 

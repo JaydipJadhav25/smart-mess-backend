@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getMenu } from "../controllers/mealMenu.controller.js";
+import { getMenu  } from "../controllers/mealMenu.controller.js";
 
 
 
@@ -7,6 +7,7 @@ const router = Router();
 
 
 router.get("/" , getMenu);
+
 
 
 
