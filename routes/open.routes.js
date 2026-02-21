@@ -2,7 +2,7 @@ import { Router } from "express";
 import { getFeesRecordsById, getStudentFeesRecordsById } from "../controllers/fess.controller.js";
 import { allAnnouncements } from "../controllers/announcement.controller.js";
 import { getAdminSettings } from "../controllers/adminSettings.controller.js";
-import { getFeeRecords } from "../controllers/open.controller.js";
+import { getFeeRecords, getStudentPlanAiResponce } from "../controllers/open.controller.js";
 
 
 
@@ -29,6 +29,7 @@ router.get("/admin/settings" ,  getAdminSettings);
 
 //open features
 router.get("/fees-record" , getFeeRecords);
+router.get("/mealPlan-record" ,  getStudentPlanAiResponce);
 
 
 
