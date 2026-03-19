@@ -1,3 +1,4 @@
+import { AdminFeedbackAiResponse } from "../model/adminFeedbackAiResponce.mode.js";
 import { FeeModel } from "../model/fees.model.js";
 import { StudentMealPlanAiResponse } from "../model/studentMealPlanAiReponse.model.js";
 import { asyncWraper } from "../utils/AsyncWraper.js";
@@ -26,9 +27,6 @@ const getFeeRecords = asyncWraper(async (req, res) => {
 
 
 
-
-
-
 const getStudentPlanAiResponce = asyncWraper(async (req, res) => {
   
   const  response  =  await StudentMealPlanAiResponse.findOne();
@@ -48,8 +46,25 @@ const getStudentPlanAiResponce = asyncWraper(async (req, res) => {
 
 
 
+const getAdminFeedbacksAiResponseHistory = asyncWraper(async( req, res)=>{
+   
+  // fetech all ai response history and show
+  const aiResponse  = await AdminFeedbackAiResponse.find();
+
+  //return
+  
+  res.status(200).json({
+    success: true,
+    history: aiResponse
+  });
+
+});
+
+
 
 export {
     getFeeRecords,
-    getStudentPlanAiResponce
+    getStudentPlanAiResponce,
+    getAdminFeedbacksAiResponseHistory
+
 }

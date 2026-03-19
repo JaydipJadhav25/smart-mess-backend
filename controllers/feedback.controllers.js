@@ -1,4 +1,5 @@
 
+import { AdminFeedbackAiResponse } from "../model/adminFeedbackAiResponce.mode.js";
 import { FeedbackModel } from "../model/feedback.model.js";
 import { generateAnalytics } from "../service/ai.service.js";
 import { ApiError } from "../utils/ApiError.js";
@@ -73,14 +74,24 @@ const feedbackAnalytics = async(req , res)=>{
                 message : "feedback are required!"
             })
           }
+
         //call ai 
         const response = await generateAnalytics(feedbacks);
+
+        console.log("response from ai : ",  response);
+
+        //save in db
+        await AdminFeedbackAiResponse.create({
+          aiResponse : response
+        });
+
 
         return res
         .status(200)
         .json(response);
 
       } catch (error) {
+
          console.error('Error analying feedback by date:', error);
     res.status(500).json({ message: 'Server error while analying feedback.' });
         

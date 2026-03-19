@@ -25,7 +25,11 @@ router.post("/update/announcements" , updateAnnouncements);
 
 
 //get all leaves 
-router.get("/leaves/today" , getTodayMessLeaves)
+router.get("/leaves/today" , getTodayMessLeaves);
+
+
+
+
 
 
 
