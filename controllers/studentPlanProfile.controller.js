@@ -1,6 +1,7 @@
 import { StudentMealPlanAiResponse } from "../model/studentMealPlanAiReponse.model.js";
 import { StudentPlanProfile } from "../model/studentPlanProfile.model.js";
-import { generateStudentMealPlanAI } from "../service/ai.generateStudenPlan.service.js";
+// import { generateStudentMealPlanAI } from "../service/ai.generateStudenPlan.service.js";
+import { generateStudentMealPlanAIUsingGemini } from "../service/ai.studentPlaneSevices.js";
 import { ApiError } from "../utils/ApiError.js";
 import { asyncWraper } from "../utils/AsyncWraper.js";
 
@@ -180,7 +181,7 @@ if (existingUserPlan) {
 console.log("user profile : " , userData)
 
 //all to ai to send userProfile and tday meal
-const aiReponse = await generateStudentMealPlanAI({...userData})
+const aiReponse = await generateStudentMealPlanAIUsingGemini({...userData})
 
 console.log("ai reposnes : " , aiReponse);
 

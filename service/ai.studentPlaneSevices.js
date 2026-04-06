@@ -1,4 +1,9 @@
-import { openai } from "../config/openaiConfig.js";
+import dotenv from "dotenv";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+dotenv.config();
+
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API2_KEY);
 
 const systemPrompt = `
 You are a Student Wellness Assistant for a college mess system.
@@ -42,9 +47,19 @@ You are helping a college student follow today’s mess food wisely.
 
 `;
 
-export async function generateStudentMealPlanAI({day , age  , gender , height , weight , goal , lunch , dinner }) {
+
+const model = genAI.getGenerativeModel({
+  model: "gemini-2.5-flash",
+  generationConfig: {
+    responseMimeType: "application/json",
+    temperature: 0.3,
+  },
+  systemInstruction: systemPrompt ,
+});
+
+export const generateStudentMealPlanAIUsingGemini = async ({day , age  , gender , height , weight , goal , lunch , dinner }) => {
   try {
-const userPrompt = `
+ const userPrompt = `
 Day: ${day}
 
 Student Profile:
@@ -60,23 +75,15 @@ Dinner: ${dinner.join(", ")}
 
 Now generate today's student-friendly meal and wellness plan.
 `;
-
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userPrompt },
-      ],
-      temperature: 0.8,
-      response_format: { type: "json_object" },
-    });
-
-    const content = completion.choices[0].message?.content;
-    const result = JSON.parse(content);
-    return result;
-
-  } catch (error) {
-    console.error("AI Genrate Student Meal Plan Service Error:", error);
-    throw new Error("Failed to generate recipes"); 
+    const result = await model.generateContent(userPrompt);
+    const text = result.response.text();
+    
+    const analytics = JSON.parse(text);
+    return analytics;
+  } catch (err) {
+    console.error("AI Error:", err);
+    throw err;
   }
-}
+
+};
+
