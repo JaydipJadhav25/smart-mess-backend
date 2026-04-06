@@ -119,7 +119,7 @@ const getStudentPlanProfile = asyncWraper(async (req, res) => {
 
 });
 
-const genrateSrudentTodayPlan = asyncWraper(async(req, res) =>{
+const genrateStudentTodayPlan = asyncWraper(async(req, res) =>{
   const {day , lunch , dinner} = req.body;
   // console.log("client side data  : " , day , lunch , dinner);
   if (!day || !lunch|| !dinner) {
@@ -181,9 +181,9 @@ if (existingUserPlan) {
 console.log("user profile : " , userData)
 
 //all to ai to send userProfile and tday meal
-const aiReponse = await generateStudentMealPlanAIUsingGemini({...userData})
+const aiReponse = await generateStudentMealPlanAIUsingGemini({...userData});
 
-console.log("ai reposnes : " , aiReponse);
+// console.log("ai reposnes : " , aiReponse);
 
 //save in db
 // const aiResponseStor = await StudentMealPlanAiResponse.create({
@@ -227,5 +227,5 @@ return res.status(200).json({
 export{
     createStudentPlaneProfile,
     getStudentPlanProfile,
-    genrateSrudentTodayPlan
+    genrateStudentTodayPlan
 }
